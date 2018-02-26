@@ -7,21 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * Created by Corsista on 23/02/2018.
  */
 
-public class dettaglioFragment extends Fragment {
-    ArrayAdapter <String> itemsAdapter;
-    @Override
-
-    public  void  onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        itemsAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, Pizza.pizzaDetails);
-
-    }
-
+public class DettaglioFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,7 +24,10 @@ public class dettaglioFragment extends Fragment {
     @Override
     public  void onViewCreated(View view, Bundle savedInstanceState)
     {
-        ListView lvItem = (ListView) view.findViewById(R.id.textview);
-        lvItem.setAdapter(itemsAdapter);
+        TextView lvItem = (TextView) view.findViewById(R.id.textview);
+        Bundle bundle = this.getArguments();
+        int myInt = bundle.getInt("position", 0);
+        lvItem.setText(Pizza.pizzaDetails[myInt]);
     }
+
 }
