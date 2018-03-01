@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity implements ListaFragment.OnHeadlineSelectedListener {
+    private static int si;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,8 +24,14 @@ public class MainActivity extends AppCompatActivity implements ListaFragment.OnH
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
         {
+            ListaFragment fragment = new ListaFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+            fragmentTransaction.commit();
             DettaglioFragment fragment2 = new DettaglioFragment();
             Bundle bundle = new Bundle();
+            bundle.putInt("position", si);
             fragment2.setArguments(bundle);
             FragmentManager fragmentManager2 = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements ListaFragment.OnH
             fragmentTransaction.replace(R.id.fragmentContainer, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+            si=position;
         }
     }
 }
